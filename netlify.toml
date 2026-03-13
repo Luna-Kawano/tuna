@@ -1,14 +1,17 @@
 # netlify.toml
 # ──────────────────────────────────────────────────────────────
-# Drop this file in the ROOT of your GitHub repo alongside index.html
-# It tells Netlify where your serverless functions live.
+# Drop this file in the ROOT of your GitHub repo alongside index.html.
+# It tells Netlify where your serverless functions live and how to build.
 # ──────────────────────────────────────────────────────────────
 
 [build]
-  # No build command needed — it's a static site
-  publish = "."
+  publish   = "."
   functions = "netlify/functions"
 
+[functions]
+  # Tells Netlify to run npm install inside netlify/functions/
+  # so stripe and nodemailer are available at runtime
+  node_bundler = "esbuild"
+
 [dev]
-  # Local dev server port (run `netlify dev` to test functions locally)
   port = 8888
