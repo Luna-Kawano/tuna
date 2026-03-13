@@ -3,7 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tuna Kawano</title>
+  <title>Tuna Kawano — Art Prints, Stickers & Original Work</title>
+  <meta name="description" content="Original art prints, stickers, and one-of-a-kind work by Tuna Kawano — a self-taught artist from Banff, Canada. Shop prints, stickers, and merch." />
+  <meta name="author" content="Tuna Kawano" />
+  <link rel="canonical" href="https://tunakawano.com/" />
+
+  <!-- Open Graph (controls how your link looks when shared on social / iMessage) -->
+  <meta property="og:title"       content="Tuna Kawano — Art Prints & Stickers" />
+  <meta property="og:description" content="Original art prints, stickers, and one-of-a-kind work by a self-taught artist from Banff, Canada." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://tunakawano.com/" />
+  <meta property="og:image"       content="https://tunakawano.com/images/og-image.jpg" />
+  <!-- og:image → upload a 1200×630px preview image as images/og-image.jpg -->
+  <!-- It appears when someone shares your link on Instagram, iMessage, etc. -->
+
+  <!-- Structured data — helps Google understand this is an artist's shop -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Tuna Kawano",
+    "url": "https://tunakawano.com",
+    "description": "Original art prints, stickers, and one-of-a-kind work by a self-taught artist from Banff, Canada.",
+    "image": "https://tunakawano.com/images/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Banff",
+      "addressRegion": "AB",
+      "addressCountry": "CA"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Tuna Kawano"
+    },
+    "currenciesAccepted": "CAD",
+    "paymentAccepted": "Credit Card",
+    "priceRange": "$$"
+  }
+  </script>
+
+  <!-- Favicon -->
   <!-- FAVICON: upload your icon as images/favicon.png to GitHub -->
   <!-- 32×32px or 64×64px PNG works best                        -->
   <link rel="icon" type="image/png" href="images/favicon.png" />
@@ -224,8 +263,9 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 16px;
-      padding: 10px 14px;f
-      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border: 1px solid #aaa;
+      background: #eceae5;
       font-size: 11px;
       color: var(--mid);
       font-family: 'Courier', monospace;
@@ -559,31 +599,122 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .modal-header h3 { font-family: 'Courier', monospace; font-size: 1.1rem; font-weight: 700; }
-    .modal-body { display: grid; grid-template-columns: 1fr 1fr; }
+    .modal-header h3 { font-family: 'Courier', monospace; font-size: 1rem; font-weight: 700; }
+    .modal-body { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
 
     .modal-img {
-      aspect-ratio: 1;
       background: #e8e8e8;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
       font-size: 11px;
       color: var(--mid);
       border-right: 1px solid var(--border);
       overflow: hidden;
       position: relative;
+      min-height: 260px;
     }
 
-    .modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
     .modal-img .img-label { position: absolute; }
     .modal-img img.loaded + .img-label { display: none; }
 
-    .modal-info { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-    .modal-name { font-family: 'Courier', monospace; font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
-    .modal-desc { font-size: 13px; color: var(--mid); line-height: 1.6; flex: 1; }
-    .modal-price { font-size: 1rem; font-weight: 700; }
+    .modal-info { padding: 16px; display: flex; flex-direction: column; gap: 6px; justify-content: space-between; }
+    .modal-name { font-family: 'Courier', monospace; font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+    .modal-desc { font-size: 12px; color: var(--mid); line-height: 1.5; }
+    .modal-price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .modal-price { font-size: 0.95rem; font-weight: 700; }
     .modal-stock { font-size: 11px; color: var(--mid); }
+
+    /* ---------- VARIANT DROPDOWN ---------- */
+    .variant-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .variant-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+    }
+
+    .variant-select {
+      font-family: 'Courier', monospace;
+      font-size: 13px;
+      color: var(--black);
+      background: var(--white);
+      border: 1px solid var(--black);
+      padding: 7px 10px;
+      width: 100%;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23111'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      padding-right: 28px;
+    }
+
+    .variant-select:focus { outline: none; border-color: var(--black); }
+
+    /* ---------- CART DISCOUNT LINE ---------- */
+    .cart-discount {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #2a7a2a;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    /* ---------- DISCOUNT TIER BANNER ---------- */
+    .discount-tier-banner {
+      background: #f0f7f0;
+      border: 1px solid #c8e0c8;
+      padding: 5px 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #2a7a2a;
+    }
+
+    .discount-tier-label { font-weight: 700; }
+    .discount-tier-tiers { opacity: 0.85; }
+    .modal-discount-tier { margin: 0; }
+    /* ---------- MODAL IMAGE GALLERY ---------- */
+    .modal-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+    }
+    .modal-img-main {
+      width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0;
+    }
+    .modal-thumbnails {
+      position: absolute;
+      bottom: 8px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      z-index: 2;
+      padding: 0 8px;
+    }
+    .modal-thumb {
+      width: 36px;
+      height: 36px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.15s, border-color 0.15s;
+      background: #e8e8e8;
+    }
+    .modal-thumb.active, .modal-thumb:hover { opacity: 1; border-color: var(--black); }
+    .modal-img-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--mid); }
+
 
     @media (max-width: 480px) {
       .modal-body { grid-template-columns: 1fr; }
@@ -782,16 +913,27 @@
       <button class="close-btn" onclick="closeModal()">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-img">
-        <img id="modalImg" src="" alt="" />
-        <span class="img-label" id="modalImgLabel">[ img ]</span>
+      <div class="modal-img" id="modalImgBox">
+        <div class="modal-img-wrap">
+          <img id="modalImg" class="modal-img-main" src="" alt="" />
+          <span class="modal-img-placeholder" id="modalImgLabel">[ img ]</span>
+          <div class="modal-thumbnails" id="modalThumbnails"></div>
+        </div>
       </div>
       <div class="modal-info">
-        <div class="modal-name" id="modalName"></div>
+
         <div class="modal-desc" id="modalDesc"></div>
-        <div class="modal-price" id="modalPrice"></div>
-        <div class="modal-stock" id="modalStock"></div>
-        <button class="btn" id="modalAddBtn" style="margin-top:8px;width:100%"></button>
+        <div class="variant-row" id="modalVariantRow" style="display:none;">
+          <span class="variant-label">Size</span>
+          <select class="variant-select" id="modalVariantSelect" onchange="onModalVariantChange()"></select>
+        </div>
+        <div id="modalDiscountTier" style="display:none;"></div>
+        <div class="modal-price-row">
+          <span class="modal-price" id="modalPrice"></span>
+          <span class="modal-stock" id="modalStock"></span>
+        </div>
+        <div style="font-size:10px;color:var(--mid);">CAD · shipping at checkout</div>
+        <button class="btn" id="modalAddBtn" style="width:100%;margin-top:2px;"></button>
       </div>
     </div>
   </div>
@@ -810,6 +952,7 @@
     <p class="empty-cart">Your cart is empty.</p>
   </div>
   <div class="cart-footer">
+    <div id="cartDiscounts"></div>
     <div class="cart-total">
       <span>Total</span>
       <span id="cartTotal">$0.00</span>
@@ -950,6 +1093,9 @@
           <a href="mailto:kawano.luna@gmail.com">email →</a>
           <a href="https://instagram.com/tuna_kawano" target="_blank">Instagram →</a>
         </div>
+        <p style="margin-top:24px; font-size:12px; color:#888; line-height:1.6;">
+          <strong>Returns &amp; refunds:</strong> Every order is packed with care and love! Since each piece is made to order or hand-packed just for you, I'm not able to accept returns or exchanges. That said, if something arrives damaged or isn't quite right, please reach out within 7 days with a photo and I'll always do my best to make it right 🫶
+        </p>
       </section>
 
     </div>
@@ -959,7 +1105,7 @@
     <div class="container">
       <div class="footer-inner">
         <span>© 2026 Tuna Kawano</span>
-        <span>Made with care somewhere in Canada.</span>
+        <span style="font-size:11px;color:var(--mid);text-align:center;">made with love in Banff, Canada 🏔️</span>
         <!--
           FOOTER LOGO: upload your SVG as images/logo-footer.svg to GitHub.
         -->
@@ -1001,19 +1147,19 @@
       <button class="btn-outline btn" onclick="openCart()">View Cart</button>
     </div>
     <div class="filter-bar" id="filterBar"></div>
+    <div id="shopDiscountBanner"></div>
     <div class="products-grid" id="productsFullGrid"></div>
   </div>
 </div>
 
 <script>
   // ============================================================
-  // DATA
-  // ============================================================
-
   // GALLERY
-  // - Add more items here as you create new work
-  // - img: upload file as images/<filename> to GitHub
-  // - The home page always shows exactly the first 6
+  // ─────────────────────────────────────────────────────────────
+  // Add more items as you create new work.
+  // img: upload as images/<filename> to GitHub.
+  // Home page always shows exactly the first 6.
+  // ============================================================
   const GALLERY = [
     { title: "Untitled No. 1",  medium: "Ink on paper",         desc: "Add a description of this piece here.", img: "gallery-1.jpg"  },
     { title: "Untitled No. 2",  medium: "Watercolour",          desc: "Add a description of this piece here.", img: "gallery-2.jpg"  },
@@ -1029,79 +1175,307 @@
     { title: "Untitled No. 12", medium: "Ink on paper",         desc: "Add a description of this piece here.", img: "gallery-12.jpg" },
   ];
 
+  // ============================================================
   // PRODUCTS
   // ─────────────────────────────────────────────────────────────
-  // Fields:
+  // Two kinds of products:
+  //
+  // ── SINGLE-SIZE (no variants) ────────────────────────────────
+  // Use flat fields: price, stock, stripePrice, printfulVariantId
+  // Example: stickers, originals, tote bags
+  //
+  // ── MULTI-SIZE (with variants) ───────────────────────────────
+  // Use a variants array instead of flat price/stock/stripePrice.
+  // Each variant = one size option with its own price + Stripe Price ID.
+  // For Printful items, each variant also needs a printfulVariantId.
+  // Example: prints with A5/A4/A3, t-shirts with S/M/L/XL
+  //
+  // ── FIELDS ───────────────────────────────────────────────────
   //   id            unique slug, no spaces (used by cart + Stripe)
   //   name          display name
-  //   category      "stickers" | "prints" | "merch" | "originals"
+  //   tags          array, e.g. ['stickers'] or ['stickers', 'banff']
+  //                 available: stickers · banff · prints · merch · originals · scrunchies
   //   bestseller    true = appears under Bestsellers filter
-  //   desc          short description shown on product card/modal
-  //   price         price in CENTS, CAD (400 = $4.00)
-  //   stock         number = limited qty shown to buyer; null = unlimited
-  //   img           filename inside your images/ folder on GitHub
-  //   stripePrice   Stripe Price ID — create in Stripe dashboard, paste here
-  //                 looks like: "price_1Pxyz..."
+  //   fulfillment   "self" = you ship it  |  "printful" = POD
+  //   desc          short description
+  //   img           filename inside images/ folder
   //
-  //   fulfillment   "self"     → you pack and ship it yourself
-  //                 "printful" → Printful prints + ships automatically
-  //                 "gelato"   → Gelato prints + ships automatically
+  //   Single-size only:
+  //     price         cents CAD  (400 = $4.00)
+  //     stock         number = limited qty  |  null = unlimited
+  //     stripePrice   Stripe Price ID ("price_1Pxyz...")
+  //     printfulVariantId  only if fulfillment = "printful"
   //
-  //   printfulVariantId   only needed when fulfillment = "printful"
-  //                       find it in Printful's product catalogue API
-  //                       or dashboard → Products → Sync → Variant ID
-  //   gelatoProductUid    only needed when fulfillment = "gelato"
-  //                       find it in Gelato's product catalogue
+  //   Multi-size only:
+  //     variants: [
+  //       { size, price, stock, stripePrice, printfulVariantId }
+  //       // printfulVariantId only needed for Printful items
+  //     ]
   //
-  // ─────────────────────────────────────────────────────────────
-  // HOME PAGE PREVIEW: always shows the first 6 products below.
-  // Reorder this array to control which 6 appear on the home page.
+  // ── HOME PAGE PREVIEW ────────────────────────────────────────
+  // Always shows the first 6 products. Reorder array to control which 6.
   // ─────────────────────────────────────────────────────────────
   const PRODUCTS = [
-    { id: "sticker-1",   name: "Sticker No. 1",    category: "stickers",  bestseller: true,  fulfillment: "self",     printfulVariantId: null, desc: "Vinyl sticker, weatherproof. ~3 inches.",  price: 400,   stock: 50, img: "sticker-1.jpg",   stripePrice: "price_PLACEHOLDER" },
-    { id: "sticker-2",   name: "Sticker No. 2",    category: "stickers",  bestseller: false, fulfillment: "self",     printfulVariantId: null, desc: "Vinyl sticker, weatherproof. ~3 inches.",  price: 400,   stock: 30, img: "sticker-2.jpg",   stripePrice: "price_PLACEHOLDER" },
-    { id: "print-1",     name: "Art Print - A5",   category: "prints",    bestseller: true,  fulfillment: "self",     printfulVariantId: null, desc: "Giclee print on 200gsm paper. Signed.",    price: 2000,  stock: 15, img: "print-1.jpg",     stripePrice: "price_PLACEHOLDER" },
-    { id: "print-2",     name: "Art Print - A4",   category: "prints",    bestseller: false, fulfillment: "self",     printfulVariantId: null, desc: "Giclee print on 200gsm paper. Signed.",    price: 3000,  stock: 10, img: "print-2.jpg",     stripePrice: "price_PLACEHOLDER" },
-    { id: "sticker-pack", name: "Sticker Pack (5)", category: "stickers",  bestseller: true,  fulfillment: "self",     printfulVariantId: null, desc: "A surprise mix of 5 vinyl stickers.",      price: 1500,  stock: 20, img: "sticker-pack.jpg", stripePrice: "price_PLACEHOLDER" },
-    { id: "print-bundle", name: "Print Bundle (2)", category: "prints",    bestseller: false, fulfillment: "self",     printfulVariantId: null, desc: "Any two A5 prints. Mixed or matching.",    price: 3500,  stock: 8,  img: "print-bundle.jpg", stripePrice: "price_PLACEHOLDER" },
-    { id: "tote-1",      name: "Tuna Tote Bag",    category: "merch",     bestseller: true,  fulfillment: "printful", printfulVariantId: null, desc: "Heavy canvas tote with original artwork.",  price: 2800,  stock: null, img: "tote-1.jpg",     stripePrice: "price_PLACEHOLDER" },
-    { id: "tshirt-1",    name: "Tuna T-Shirt",     category: "merch",     bestseller: false, fulfillment: "printful", printfulVariantId: null, desc: "Soft unisex tee. Sizes S–XL.",              price: 3800,  stock: null, img: "tshirt-1.jpg",   stripePrice: "price_PLACEHOLDER" },
-    { id: "original-1",  name: "Original No. 1",   category: "originals", bestseller: false, fulfillment: "self",     printfulVariantId: null, desc: "One-of-a-kind original. Ink on paper.",     price: 18000, stock: 1,  img: "original-1.jpg",  stripePrice: "price_PLACEHOLDER" },
-    { id: "original-2",  name: "Original No. 2",   category: "originals", bestseller: false, fulfillment: "self",     printfulVariantId: null, desc: "One-of-a-kind original. Watercolour.",      price: 22000, stock: 1,  img: "original-2.jpg",  stripePrice: "price_PLACEHOLDER" },
+    // ═══════════════════════════════════════════════════════════
+    // STICKERS
+    // Regular stickers: $5 · Banff Bear: $7
+    // All single-size, self-fulfilled, unlimited stock.
+    // Upload images to the images/ folder on GitHub.
+    // ═══════════════════════════════════════════════════════════
+
+    { id: "sticker-tired",      name: "I'm Tired Sticker",              tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "Charcoal-sketched. Leave-me-alone vibes. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-tired.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-pylon",      name: "Moody Pylon Sticker",             tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "Charcoal-sketched. Moody pylon energy. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-pylon.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-wizard-frog", name: "Wizard Frog Sticker",            tags: ['stickers'],
+      bestseller: true, fulfillment: "self",
+      desc: "A whimsical frog wizard to brighten your day. 2.8×2.5\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-wizard-frog.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-fish",       name: "Fish Sticker",                    tags: ['stickers'],
+      bestseller: true, fulfillment: "self",
+      desc: "A silly fish from an original acrylic painting. 2.8×2.5\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-fish.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-fwenz",      name: "Are We Still Fwenz Sticker",      tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "For the friend you've been meaning to check in with. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-fwenz.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-duck",       name: "Duck Mirror Sticker",             tags: ['stickers'],
+      bestseller: true, fulfillment: "self",
+      desc: "A charcoal-sketched duck for duck enthusiasts. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-duck.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-plover",     name: "Plover Fam Sticker",              tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "A pencil-sketched plover family. For birb lovers. 3×2.5\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-plover.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-cat",        name: "Liquid Cat Sticker",              tags: ['stickers'],
+      bestseller: true, fulfillment: "self",
+      desc: "A very liquid cat in a very small box. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-cat.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-tv-angel",   name: "TV Angel Sticker",                tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "Charcoal-sketched moody angel vibes. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-tv-angel.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-blundstone", name: "Blundstone House Sticker",        tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "A tiny house in a tiny boot. Smol things in smol spaces. 3×2.6\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-blundstone.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-ghosts",     name: "Vibin' Ghosts Sticker",          tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "Two ghosts riding Kellogg go-karts. Just vibing. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-ghosts.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-noggin",     name: "Bonked Noggin Club Sticker",      tags: ['stickers'],
+      bestseller: true, fulfillment: "self",
+      desc: "For the concussion/TBI community. Cute and visible. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-noggin.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-dog",        name: "Sus Dog Sticker",                 tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "An Instagram-famous sassy dog, looking for a new home. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-dog.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-girl-goose", name: "Girl & Goose Sticker",            tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "Pencil-sketched cute vibes for cute-vibes people. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-girl-goose.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-tuna",       name: "Tuna Sticker",                    tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "My logo :) Tuna, because I'm Luna. Great for Tuna lovers and all the pets with the same name as me hehe. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-tuna.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-nutella",    name: "Nutella Sticker",                 tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "For Nutella lovers. A little sweetness for your laptop. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-nutella.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-cola-house", name: "Cola House Sticker",              tags: ['stickers'],
+      bestseller: false, fulfillment: "self",
+      desc: "A cozy tiny home inside a cola can. Smol things in smol spaces. 2.8×2.5\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-cola-house.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    // ── Banff stickers (show under both Stickers + Banff filters) ─────────
+    { id: "sticker-housing",    name: "Affordable Housing in Banff Sticker", tags: ['stickers', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "If you've lived in Banff, you get it. Manifesting a shoe house. 2.5×1.85\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-housing.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-beary-cool", name: "Banff Is Beary Cool Sticker",     tags: ['stickers', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "A beary cool bear with cool goggles. 3×3\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-beary-cool.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-goated",     name: "Banff Is Goated Sticker",         tags: ['stickers', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "Featuring Mt. Assiniboine and fireweeds. Banff is the goat. 3×3\" matte vinyl, weatherproof.",
+      price: 500, stock: null, img: "sticker-goated.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "sticker-banff-bear", name: "Banff Bear Sticker",              tags: ['stickers', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "One brushstroke bear with the Banff font. A token of your time here. 5.5×2.83\" matte vinyl, weatherproof.",
+      price: 700, stock: null, img: "sticker-banff-bear.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    // ═══════════════════════════════════════════════════════════
+    // PRINTS
+    // Pet portraits: 6×6", self-fulfilled, $12
+    // Bear print: Giclée archival, 3 sizes, self-fulfilled
+    // Laputa + Affordable Housing: 8×10", self-fulfilled, $15
+    // ═══════════════════════════════════════════════════════════
+
+    { id: "print-fabio-cat",    name: "Orange Cat Print",                tags: ['prints'],
+      bestseller: false, fulfillment: "self",
+      desc: "From an original acrylic commission. Professional print on 250gsm paper, 6×6\". Ships in rigid mailer.",
+      price: 1200, stock: null, img: "print-fabio-cat.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "print-nikki-dog",    name: "Black Dog Print",                 tags: ['prints'],
+      bestseller: false, fulfillment: "self",
+      desc: "From an original acrylic commission. Professional print on 250gsm paper, 6×6\". Ships in rigid mailer.",
+      price: 1200, stock: null, img: "print-nikki-dog.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    {
+      id: "print-bear-flower", name: "Black Bear Cub & Wildflowers Fine Art Print", tags: ['prints', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "Originally an acrylic painting on a 24×30\" canvas, ft. wildflowers from the Rockies and a cutsie black bear cub. Giclée archival print on 200gsm matte paper.",
+      img: "print-bear-flower.jpg",
+      variants: [
+        { size: '8×10"',  price: 3000, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: '11×14"', price: 4500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: '16×20"', price: 7500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+      ],
+    },
+
+    { id: "print-laputa",       name: "Laputa Print",                    tags: ['prints'],
+      bestseller: true, fulfillment: "self",
+      desc: "Inspired by Laputa (aka Castle in the Sky). Professional print on 250gsm paper, 8×10\". Ships in rigid mailer.",
+      price: 1500, stock: null, img: "print-laputa.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "print-affordable-housing", name: "Affordable Housing in Banff Print", tags: ['prints', 'banff'],
+      bestseller: false, fulfillment: "self",
+      desc: "If you've lived in Banff, you get it. Manifesting a shoe house. Professional print on 250gsm paper, 8×10\". Ships in rigid mailer.",
+      price: 1500, stock: null, img: "print-housing.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    // ═══════════════════════════════════════════════════════════
+    // MERCH
+    // Sweaters: Printful POD. Tote + scrunchies: self-fulfilled.
+    // ═══════════════════════════════════════════════════════════
+
+    {
+      id: "sweater-hiking-boots", name: "Life is Better in Hiking Boots Sweater", tags: ['merch'],
+      bestseller: true, fulfillment: "printful",
+      desc: "A cozy sketch from my sketchbook, now on a crewneck for adventure lovers. 50/50 cotton-poly. Gildan 18000. Custom order printed + shipped by Printful ❤️",
+      img: "sweater-hiking-boots.jpg",
+      variants: [
+        { size: "S",  price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "M",  price: 5500, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "L",  price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "XL", price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "2X", price: 5600, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+      ],
+    },
+
+    {
+      id: "sweater-noggin", name: "Bonked Noggin Club Sweater",          tags: ['merch'],
+      bestseller: true, fulfillment: "printful",
+      desc: "Let's embrace our cute, silly, bonked-noggin life with this crewneck sweater. For my concussion + TBI community. 50/50 cotton-poly. Gildan 18000. Custom order printed + shipped by Printful ❤️",
+      img: "sweater-noggin.jpg",
+      variants: [
+        { size: "S",  price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "M",  price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "L",  price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "XL", price: 5400, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "2X", price: 5600, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: "3X", price: 6200, stock: null, fulfillment: "printful", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+      ],
+    },
+
+    { id: "tote-banff-bear",    name: "Banff Bear Tote",                 tags: ['merch', 'banff'],
+      bestseller: true, fulfillment: "self",
+      desc: "Canvas tote with a one stroke Banff Bear design.",
+      price: 2600, stock: null, img: "tote-banff-bear.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "scrunchies",         name: "Scrunchies",                      tags: ['merch', 'scrunchies'],
+      bestseller: false, fulfillment: "self",
+      desc: "Scrunchies are all handmade in Banff! Each one is unique, and cute, just like you ✨",
+      price: 600, stock: null, img: "scrunchies.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    // ═══════════════════════════════════════════════════════════
+    // ORIGINALS
+    // ═══════════════════════════════════════════════════════════
+
+    { id: "original-fish",      name: "Fish Painting",                   tags: ['originals'],
+      bestseller: false, fulfillment: "self",
+      desc: "One-of-a-kind original acrylic painting. Signed and ready to hang.",
+      price: 4500, stock: 1, img: "original-fish.jpg", stripePrice: "price_PLACEHOLDER" },
+
+    { id: "original-commission", name: "Commission a Painting",          tags: ['originals'],
+      bestseller: false, fulfillment: "self",
+      commission: true,
+      desc: "Want something custom? Let's make it happen — reach out via the contact form below.",
+      price: 0, stock: null, img: "original-commission.jpg", stripePrice: "price_PLACEHOLDER" },
+  ];
+
+  // ============================================================
+  // DISCOUNT RULES
+  // ─────────────────────────────────────────────────────────────
+  // Tiered bundle discounts by category.
+  // The highest matching tier wins for that category.
+  //
+  // To add a new category rule, add a new object to the array.
+  // To change a tier, edit the min (minimum qty) or pct (% off).
+  // ─────────────────────────────────────────────────────────────
+  const DISCOUNT_RULES = [
+    {
+      category: 'stickers',
+      label: 'sticker bundle',
+      tiers: [
+        { min:  3, pct: 10 },
+        { min:  5, pct: 15 },
+        { min: 10, pct: 20 },
+        { min: 20, pct: 30 },
+      ],
+    },
+    {
+      category: 'scrunchies',
+      label: 'scrunchie bundle',
+      tiers: [
+        { min:  3, pct: 10 },
+        { min:  5, pct: 15 },
+        { min: 10, pct: 20 },
+        { min: 20, pct: 30 },
+      ],
+    },
   ];
 
   // ============================================================
   // ROUTING
   // ============================================================
-  // Views: "home" | "gallery" | "shop"
-  // - "home"    → show #homeContent, hide page-sections, URL = no hash
-  // - "gallery" → show #galleryPage, hide everything else, URL = #gallery
-  // - "shop"    → show #shopPage, hide everything else, URL = #shop
-
   function navTo(view) {
     closeNav();
-
     if (view === 'gallery') {
       window.location.hash = 'gallery';
     } else if (view === 'shop') {
       window.location.hash = 'shop';
     } else if (view === 'about') {
-      // Go to home then scroll to about
-      if (currentView() !== 'home') {
-        window.location.hash = '';
-        setTimeout(() => scrollToSection('about'), 50);
-      } else {
-        scrollToSection('about');
-      }
+      if (currentView() !== 'home') { window.location.hash = ''; setTimeout(() => scrollToSection('about'), 50); }
+      else scrollToSection('about');
     } else if (view === 'contact') {
-      if (currentView() !== 'home') {
-        window.location.hash = '';
-        setTimeout(() => scrollToSection('contact'), 50);
-      } else {
-        scrollToSection('contact');
-      }
+      if (currentView() !== 'home') { window.location.hash = ''; setTimeout(() => scrollToSection('contact'), 50); }
+      else scrollToSection('contact');
     } else {
-      // home
       window.location.hash = '';
     }
   }
@@ -1116,22 +1490,19 @@
   function currentView() {
     const h = window.location.hash;
     if (h === '#gallery') return 'gallery';
-    if (h === '#shop') return 'shop';
+    if (h === '#shop')    return 'shop';
     return 'home';
   }
 
   function applyView() {
-    const view = currentView();
-    const homeContent  = document.getElementById('homeContent');
-    const galleryPage  = document.getElementById('galleryPage');
-    const shopPage     = document.getElementById('shopPage');
+    const view        = currentView();
+    const homeContent = document.getElementById('homeContent');
+    const galleryPage = document.getElementById('galleryPage');
+    const shopPage    = document.getElementById('shopPage');
 
-    // Reset all
     homeContent.classList.remove('hidden');
     galleryPage.classList.remove('active');
     shopPage.classList.remove('active');
-
-    // Update nav active state
     document.querySelectorAll('#mainNav a').forEach(a => a.classList.remove('active'));
 
     if (view === 'gallery') {
@@ -1152,7 +1523,6 @@
     }
   }
 
-  // Listen for hash changes (back/forward buttons)
   window.addEventListener('hashchange', applyView);
 
   // ============================================================
@@ -1173,6 +1543,81 @@
     return img;
   }
 
+  // ============================================================
+  // PRODUCT HELPERS
+  // ─────────────────────────────────────────────────────────────
+  // hasVariants(p)  → true if this product uses a variants array
+  // getVariant(p, size) → the matching variant object
+  // displayPrice(p, size) → price to show (respects active variant)
+  // basePrice(p)    → lowest price (used on product cards)
+  // ============================================================
+  function hasVariants(p) { return Array.isArray(p.variants) && p.variants.length > 0; }
+
+  function getVariant(p, size) {
+    if (!hasVariants(p)) return null;
+    return p.variants.find(v => v.size === size) || p.variants[0];
+  }
+
+  function displayPrice(p, size) {
+    if (hasVariants(p)) return getVariant(p, size).price;
+    return p.price;
+  }
+
+  function basePrice(p) {
+    if (hasVariants(p)) return p.variants[0].price;
+    return p.price;
+  }
+
+  function getStock(p, size) {
+    if (hasVariants(p)) return getVariant(p, size).stock;
+    return p.stock;
+  }
+
+  function getStripePrice(p, size) {
+    if (hasVariants(p)) return getVariant(p, size).stripePrice;
+    return p.stripePrice;
+  }
+
+  function getFulfillment(p, size) {
+    // Variants can override top-level fulfillment (e.g. 8x10 = self, 11x14 = printful)
+    if (hasVariants(p)) return getVariant(p, size).fulfillment || p.fulfillment;
+    return p.fulfillment;
+  }
+
+  function getPrintfulVariantId(p, size) {
+    if (hasVariants(p)) return (getVariant(p, size).printfulVariantId || null);
+    return (p.printfulVariantId || null);
+  }
+
+  function getProduct(id) { return PRODUCTS.find(p => p.id === id); }
+
+  // Cart keys: "product-id" for single-size, "product-id||Size" for variants
+  function makeCartKey(id, size) { return size ? `${id}||${size}` : id; }
+  function parseCartKey(key)     { const [id, size] = key.split('||'); return { id, size: size || null }; }
+
+  // ============================================================
+  // DISCOUNT TIER DISPLAY
+  // ─────────────────────────────────────────────────────────────
+  // discountTierHTML(category) → inline tier ladder string
+  // shown above filter bar and inside product modals
+  // ============================================================
+  function discountTierHTML(tagsOrCat) {
+    const tags = Array.isArray(tagsOrCat) ? tagsOrCat : [tagsOrCat];
+    const rule = DISCOUNT_RULES.find(r => tags.includes(r.category));
+    if (!rule) return '';
+    const tiers = rule.tiers.map(t => `${t.min}+ = ${t.pct}% off`).join(' · ');
+    return `<div class="discount-tier-banner"><span class="discount-tier-label">🎉 Bundle: </span><span class="discount-tier-tiers">${tiers}</span></div>`;
+  }
+
+  // Returns true if this product category has a discount rule
+  function hasDiscount(tagsOrCat) {
+    const tags = Array.isArray(tagsOrCat) ? tagsOrCat : [tagsOrCat];
+    return DISCOUNT_RULES.some(r => tags.includes(r.category));
+  }
+
+  // ============================================================
+  // GALLERY — PREVIEW + FULL
+  // ============================================================
   function makeGalleryItem(item, index) {
     const div = document.createElement('div');
     div.className = 'gallery-item';
@@ -1186,26 +1631,16 @@
     return div;
   }
 
-  // ============================================================
-  // GALLERY — PREVIEW (home page, always exactly 6)
-  // ============================================================
   function renderGalleryPreview() {
     const grid = document.getElementById('galleryPreviewGrid');
     grid.innerHTML = '';
-    GALLERY.slice(0, 6).forEach((item, i) => {
-      grid.appendChild(makeGalleryItem(item, i));
-    });
+    GALLERY.slice(0, 6).forEach((item, i) => grid.appendChild(makeGalleryItem(item, i)));
   }
 
-  // ============================================================
-  // GALLERY — FULL PAGE (all items)
-  // ============================================================
   function renderGalleryFull() {
     const grid = document.getElementById('galleryFullGrid');
     grid.innerHTML = '';
-    GALLERY.forEach((item, i) => {
-      grid.appendChild(makeGalleryItem(item, i));
-    });
+    GALLERY.forEach((item, i) => grid.appendChild(makeGalleryItem(item, i)));
   }
 
   // ============================================================
@@ -1237,36 +1672,41 @@
   }
 
   // ============================================================
-  // CART
+  // CART STATE
   // ============================================================
+  // cart = { "sticker-01": 2, "print-01||A4": 1, ... }
   let cart = {};
 
-  function getProduct(id) { return PRODUCTS.find(p => p.id === id); }
-
   function cartTotal() {
-    return Object.entries(cart).reduce((sum, [id, qty]) => {
+    return Object.entries(cart).reduce((sum, [key, qty]) => {
+      const { id, size } = parseCartKey(key);
       const p = getProduct(id);
-      return sum + (p ? p.price * qty : 0);
+      return sum + (p ? displayPrice(p, size) * qty : 0);
     }, 0);
   }
 
   function cartItemCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
 
-  function addToCart(id) {
+  function addToCart(id, size) {
     const p = getProduct(id);
     if (!p) return;
-    const current = cart[id] || 0;
-    if (p.stock !== null && current >= p.stock) return;
-    cart[id] = current + 1;
-    renderProductsPreview();
-    if (currentView() === 'shop') renderProductsFull();
-    renderCart();
+    const key     = makeCartKey(id, size);
+    const current = cart[key] || 0;
+    const stock   = getStock(p, size);
+    if (stock !== null && current >= stock) return;
+    cart[key] = current + 1;
+    rerender();
   }
 
-  function removeFromCart(id) {
-    if (!cart[id]) return;
-    cart[id]--;
-    if (cart[id] <= 0) delete cart[id];
+  function removeFromCart(id, size) {
+    const key = makeCartKey(id, size);
+    if (!cart[key]) return;
+    cart[key]--;
+    if (cart[key] <= 0) delete cart[key];
+    rerender();
+  }
+
+  function rerender() {
     renderProductsPreview();
     if (currentView() === 'shop') renderProductsFull();
     renderCart();
@@ -1276,16 +1716,64 @@
 
   function updateCartCount() {
     const n = cartItemCount();
-    document.getElementById('cartCountDisplay').textContent  = n;
+    document.getElementById('cartCountDisplay').textContent = n;
     const d2 = document.getElementById('cartCountDisplay2');
     if (d2) d2.textContent = n;
   }
 
   // ============================================================
-  // FILTERS (shop full page only)
+  // DISCOUNT ENGINE
+  // ─────────────────────────────────────────────────────────────
+  // Returns an array of applied discounts:
+  //   [{ label, pct, savingsCents }, ...]
+  // Called by renderCart() and checkout() to compute final total.
+  // ============================================================
+  function calcDiscounts() {
+    const result = [];
+
+    for (const rule of DISCOUNT_RULES) {
+      // Count total items in this category across all cart keys
+      let totalQty   = 0;
+      let totalCents = 0;
+
+      for (const [key, qty] of Object.entries(cart)) {
+        const { id, size } = parseCartKey(key);
+        const p = getProduct(id);
+        const ptags = Array.isArray(p.tags) ? p.tags : [p.tags];
+        if (!p || !ptags.includes(rule.category)) continue;
+        totalQty   += qty;
+        totalCents += displayPrice(p, size) * qty;
+      }
+
+      if (totalQty === 0) continue;
+
+      // Find the highest matching tier
+      const tier = [...rule.tiers].reverse().find(t => totalQty >= t.min);
+      if (!tier) continue;
+
+      const savingsCents = Math.round(totalCents * tier.pct / 100);
+      result.push({
+        label:         `${tier.pct}% ${rule.label} discount`,
+        pct:           tier.pct,
+        savingsCents,
+        category:      rule.category,
+      });
+    }
+
+    return result;
+  }
+
+  function totalAfterDiscounts() {
+    const discounts = calcDiscounts();
+    const savings   = discounts.reduce((s, d) => s + d.savingsCents, 0);
+    return cartTotal() - savings;
+  }
+
+  // ============================================================
+  // FILTERS (shop full page)
   // ============================================================
   let activeFilter = 'all';
-  const FILTER_ORDER = ['all', 'bestsellers', 'stickers', 'prints', 'merch', 'originals', 'banff'];
+  const FILTER_ORDER = ['all', 'bestsellers', 'stickers', 'prints', 'merch', 'originals', 'scrunchies', 'banff'];
 
   function initFilters() {
     const bar = document.getElementById('filterBar');
@@ -1301,24 +1789,39 @@
     document.querySelectorAll('.filter-btn').forEach(b => {
       b.classList.toggle('active', b.textContent.trim().toLowerCase() === cat);
     });
+    // Show discount tier banner when browsing a discounted category
+    const bannerEl = document.getElementById('shopDiscountBanner');
+    if (bannerEl) {
+      bannerEl.innerHTML = hasDiscount(cat) ? discountTierHTML(cat) : '';
+    }
     renderProductsFull();
   }
 
   function filteredProducts() {
     if (activeFilter === 'all')         return PRODUCTS;
     if (activeFilter === 'bestsellers') return PRODUCTS.filter(p => p.bestseller);
-    return PRODUCTS.filter(p => p.category === activeFilter);
+    return PRODUCTS.filter(p => Array.isArray(p.tags) ? p.tags.includes(activeFilter) : p.tags === activeFilter);
   }
 
   // ============================================================
   // PRODUCT CARD HTML
+  // ─────────────────────────────────────────────────────────────
+  // Cards show the base (lowest/only) price.
+  // Clicking a card opens the modal where variants are chosen.
   // ============================================================
   function productCardHTML(p) {
-    const inCart   = cart[p.id] || 0;
-    const soldOut  = p.stock !== null && p.stock <= 0;
-    const maxed    = p.stock !== null && inCart >= p.stock;
+    // For in-cart display: count all variants of this product
+    const inCartTotal = Object.entries(cart)
+      .filter(([key]) => parseCartKey(key).id === p.id)
+      .reduce((s, [, q]) => s + q, 0);
+    const soldOut = !hasVariants(p) && p.stock !== null && p.stock <= 0;
+    const price   = basePrice(p);
+    const priceLabel = hasVariants(p)
+      ? 'from ' + formatPrice(price)
+      : formatPrice(price);
+
     return `
-      <div class="product-card ${inCart > 0 ? 'in-cart' : ''}" onclick="openModal('${p.id}')">
+      <div class="product-card ${inCartTotal > 0 ? 'in-cart' : ''}" onclick="openModal('${p.id}')">
         <div class="product-img">
           <img src="images/${p.img}" alt="${p.name}"
             onload="this.classList.add('loaded'); this.nextElementSibling.style.display='none';"
@@ -1326,32 +1829,27 @@
           <span class="img-label">${p.img}</span>
         </div>
         <div class="product-name">${p.name}</div>
-        <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
-          <span class="product-price">${formatPrice(p.price)}</span>
-          <span class="product-stock">${p.stock !== null ? p.stock + ' left' : ''}</span>
+          <span class="product-price">${priceLabel}</span>
+          <span class="product-stock">${!hasVariants(p) && p.stock !== null ? p.stock + ' left' : ''}</span>
         </div>
-        <button class="add-btn ${inCart > 0 ? 'added' : ''}"
-          onclick="event.stopPropagation(); addToCart('${p.id}')"
-          ${soldOut || maxed ? 'disabled' : ''}>
-          ${soldOut ? 'Sold out' : inCart > 0 ? 'In cart (' + inCart + ')' : 'Add to cart'}
-        </button>
+        ${p.commission
+          ? `<button class="add-btn" onclick="event.stopPropagation(); navTo('contact')">Get in touch →</button>`
+          : `<button class="add-btn ${inCartTotal > 0 ? 'added' : ''}"
+          onclick="event.stopPropagation(); openModal('${p.id}')"
+          ${soldOut ? 'disabled' : ''}>
+          ${soldOut ? 'Sold out' : inCartTotal > 0 ? 'In cart (' + inCartTotal + ')' : hasVariants(p) ? 'Choose size' : 'Add to cart'}
+        </button>`}
       </div>
     `;
   }
 
-  // ============================================================
-  // PRODUCTS — PREVIEW (home page, always exactly 6)
-  // ============================================================
   function renderProductsPreview() {
     const grid = document.getElementById('productsPreviewGrid');
     grid.innerHTML = PRODUCTS.slice(0, 6).map(productCardHTML).join('');
     updateCartCount();
   }
 
-  // ============================================================
-  // PRODUCTS — FULL PAGE (all products, filtered)
-  // ============================================================
   function renderProductsFull() {
     const grid = document.getElementById('productsFullGrid');
     if (!grid) return;
@@ -1361,59 +1859,137 @@
 
   // ============================================================
   // PRODUCT MODAL
+  // ─────────────────────────────────────────────────────────────
+  // openModal(id) — opens modal, populates variant dropdown if needed.
+  // onModalVariantChange() — called when size dropdown changes.
+  // refreshModalBtn() — updates price/stock/button for current selection.
   // ============================================================
+  let _modalProductId = null;
+
   function openModal(id) {
+    _modalProductId = id;
     const p = getProduct(id);
     if (!p) return;
-    const inCart  = cart[id] || 0;
-    const soldOut = p.stock !== null && p.stock <= 0;
-    const maxed   = p.stock !== null && inCart >= p.stock;
 
-    document.getElementById('modalTitle').textContent  = p.name;
-    document.getElementById('modalName').textContent   = p.name;
-    document.getElementById('modalDesc').textContent   = p.desc;
-    document.getElementById('modalPrice').textContent  = formatPrice(p.price);
-    document.getElementById('modalStock').textContent  = p.stock !== null ? p.stock + ' left' : '';
+    document.getElementById('modalTitle').textContent = p.name;
+    document.getElementById('modalDesc').textContent  = p.desc || '';
 
-    const imgEl   = document.getElementById('modalImg');
-    const labelEl = document.getElementById('modalImgLabel');
-    imgEl.classList.remove('loaded');
-    imgEl.style.display = '';
-    labelEl.style.display = '';
-    imgEl.src = 'images/' + p.img;
-    imgEl.alt = p.name;
-    imgEl.onload  = () => { imgEl.classList.add('loaded'); labelEl.style.display = 'none'; };
-    imgEl.onerror = () => { imgEl.style.display = 'none'; labelEl.textContent = p.img; };
+    // Multi-image support: use p.imgs array if available, fall back to p.img
+    const imgEl        = document.getElementById('modalImg');
+    const labelEl      = document.getElementById('modalImgLabel');
+    const thumbsEl     = document.getElementById('modalThumbnails');
+    const allImgs      = p.imgs ? p.imgs : (p.img ? [p.img] : []);
 
-    const btn = document.getElementById('modalAddBtn');
-    btn.textContent = soldOut ? 'Sold out' : inCart > 0 ? 'In cart (' + inCart + ')' : 'Add to cart';
-    btn.disabled = soldOut || maxed;
-    btn.onclick = () => { addToCart(id); refreshModal(id); };
+    function setModalImage(filename) {
+      imgEl.style.display = '';
+      labelEl.style.display = 'none';
+      imgEl.src = 'images/' + filename;
+      imgEl.alt = p.name;
+      imgEl.onerror = () => { imgEl.style.display = 'none'; labelEl.style.display = ''; labelEl.textContent = filename; };
+      // Update active thumb
+      document.querySelectorAll('.modal-thumb').forEach(t => {
+        t.classList.toggle('active', t.dataset.src === filename);
+      });
+    }
 
+    // Build thumbnails if there are multiple images
+    thumbsEl.innerHTML = '';
+    if (allImgs.length > 1) {
+      allImgs.forEach(fname => {
+        const t = document.createElement('img');
+        t.className = 'modal-thumb';
+        t.src = 'images/' + fname;
+        t.dataset.src = fname;
+        t.alt = '';
+        t.onerror = () => t.style.display = 'none';
+        t.onclick = (e) => { e.stopPropagation(); setModalImage(fname); };
+        thumbsEl.appendChild(t);
+      });
+    }
+
+    if (allImgs.length > 0) {
+      setModalImage(allImgs[0]);
+    } else {
+      imgEl.style.display = 'none';
+      labelEl.style.display = '';
+      labelEl.textContent = '[ img ]';
+    }
+
+    // Variant dropdown
+    const variantRow    = document.getElementById('modalVariantRow');
+    const variantSelect = document.getElementById('modalVariantSelect');
+
+    if (hasVariants(p)) {
+      variantRow.style.display = '';
+      variantSelect.innerHTML = p.variants.map(v => {
+        const stockNote = v.stock !== null && v.stock <= 0 ? ' — sold out' : '';
+        return `<option value="${v.size}">${v.size} — ${formatPrice(v.price)}${stockNote}</option>`;
+      }).join('');
+      // Pre-select first non-sold-out variant
+      const first = p.variants.find(v => v.stock === null || v.stock > 0) || p.variants[0];
+      variantSelect.value = first.size;
+    } else {
+      variantRow.style.display = 'none';
+    }
+
+    // Discount tier banner — show for stickers, scrunchies, etc.
+    const discountSlot = document.getElementById('modalDiscountTier');
+    if (discountSlot) {
+      if (hasDiscount(p.tags)) {
+        discountSlot.innerHTML = discountTierHTML(p.tags);
+        discountSlot.querySelector('.discount-tier-banner').classList.add('modal-discount-tier');
+        discountSlot.style.display = '';
+      } else {
+        discountSlot.innerHTML = '';
+        discountSlot.style.display = 'none';
+      }
+    }
+
+    refreshModalBtn();
     document.getElementById('modalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function refreshModal(id) {
-    const p = getProduct(id);
+  function onModalVariantChange() { refreshModalBtn(); }
+
+  function refreshModalBtn() {
+    const p    = getProduct(_modalProductId);
     if (!p) return;
-    const inCart  = cart[id] || 0;
-    const soldOut = p.stock !== null && p.stock <= 0;
-    const maxed   = p.stock !== null && inCart >= p.stock;
+    const size = hasVariants(p) ? document.getElementById('modalVariantSelect').value : null;
+    const key  = makeCartKey(p.id, size);
+
+    const inCart  = cart[key] || 0;
+    const stock   = getStock(p, size);
+    const soldOut = stock !== null && stock <= 0;
+    const maxed   = stock !== null && inCart >= stock;
+    const price   = displayPrice(p, size);
+
+    document.getElementById('modalPrice').textContent = formatPrice(price);
+    document.getElementById('modalStock').textContent = stock !== null ? stock + ' left' : '';
+
     const btn = document.getElementById('modalAddBtn');
-    btn.textContent = soldOut ? 'Sold out' : inCart > 0 ? 'In cart (' + inCart + ')' : 'Add to cart';
-    btn.disabled = soldOut || maxed;
+    if (p.commission) {
+      btn.textContent = 'Get in touch →';
+      btn.disabled    = false;
+      btn.onclick     = () => { closeModal(); navTo('contact'); };
+    } else {
+      btn.textContent = soldOut ? 'Sold out' : inCart > 0 ? 'In cart (' + inCart + ')' : 'Add to cart';
+      btn.disabled    = soldOut || maxed;
+      btn.onclick     = () => { addToCart(p.id, size); refreshModalBtn(); };
+    }
   }
 
   function closeModal() {
     document.getElementById('modalOverlay').classList.remove('open');
     document.body.style.overflow = '';
+    _modalProductId = null;
   }
 
   // ============================================================
   // CART DRAWER
   // ============================================================
   function openCart() {
+    renderCart();
     document.getElementById('cartOverlay').classList.add('open');
     document.getElementById('cartDrawer').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1426,63 +2002,94 @@
   }
 
   function renderCart() {
-    const container  = document.getElementById('cartItems');
-    const totalEl    = document.getElementById('cartTotal');
+    const container   = document.getElementById('cartItems');
+    const discountsEl = document.getElementById('cartDiscounts');
+    const totalEl     = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
-    const count = cartItemCount();
+    const count       = cartItemCount();
 
     updateCartCount();
-    totalEl.textContent = formatPrice(cartTotal());
-    checkoutBtn.disabled = count === 0;
 
     if (count === 0) {
-      container.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+      container.innerHTML   = '<p class="empty-cart">Your cart is empty.</p>';
+      discountsEl.innerHTML = '';
+      totalEl.textContent   = '$0.00';
+      checkoutBtn.disabled  = true;
       return;
     }
 
-    container.innerHTML = Object.entries(cart).map(([id, qty]) => {
+    // Line items
+    container.innerHTML = Object.entries(cart).map(([key, qty]) => {
+      const { id, size } = parseCartKey(key);
       const p = getProduct(id);
       if (!p) return '';
+      const stock     = getStock(p, size);
+      const price     = displayPrice(p, size);
+      const nameLabel = size ? `${p.name} (${size})` : p.name;
+      // encode size safely for inline onclick
+      const sizeArg   = size ? `'${size}'` : 'null';
       return `
         <div class="cart-item">
           <div class="cart-item-info">
-            <div class="cart-item-name">${p.name}</div>
-            <div class="cart-item-price">${formatPrice(p.price)} each</div>
+            <div class="cart-item-name">${nameLabel}</div>
+            <div class="cart-item-price">${formatPrice(price)} each</div>
           </div>
           <div class="cart-item-qty">
-            <button class="qty-btn" onclick="removeFromCart('${id}')">−</button>
+            <button class="qty-btn" onclick="removeFromCart('${id}', ${sizeArg})">−</button>
             <span>${qty}</span>
-            <button class="qty-btn" onclick="addToCart('${id}')"
-              ${p.stock !== null && qty >= p.stock ? 'disabled' : ''}>+</button>
+            <button class="qty-btn" onclick="addToCart('${id}', ${sizeArg})"
+              ${stock !== null && qty >= stock ? 'disabled' : ''}>+</button>
           </div>
         </div>
       `;
     }).join('');
+
+    // Discount lines
+    const discounts = calcDiscounts();
+    if (discounts.length > 0) {
+      discountsEl.innerHTML = discounts.map(d => `
+        <div class="cart-discount">
+          <span>✓ ${d.label}</span>
+          <span>− ${formatPrice(d.savingsCents)}</span>
+        </div>
+      `).join('');
+    } else {
+      discountsEl.innerHTML = '';
+    }
+
+    totalEl.textContent  = formatPrice(totalAfterDiscounts());
+    checkoutBtn.disabled = false;
   }
 
   // ============================================================
   // CHECKOUT
   // ─────────────────────────────────────────────────────────────
   // When Stripe is ready:
-  //   1. Deploy netlify/functions/create-checkout.js (see that file)
+  //   1. Deploy netlify/functions/create-checkout.js
   //   2. Set STRIPE_SECRET_KEY in Netlify environment variables
   //   3. Uncomment the fetch() block below and delete the alert()
   // ─────────────────────────────────────────────────────────────
   async function checkout() {
     const btn = document.getElementById('checkoutBtn');
 
-    // Build line items — each item carries its fulfillment type
-    // so the Netlify function knows what to do after payment
-    const items = Object.entries(cart).map(([id, qty]) => {
+    const discounts = calcDiscounts();
+
+    // Build line items — one entry per cart key (product + size combo)
+    const items = Object.entries(cart).map(([key, qty]) => {
+      const { id, size } = parseCartKey(key);
       const p = getProduct(id);
       return {
-        productId:        p.id,
-        stripePrice:      p.stripePrice,
-        quantity:         qty,
-        fulfillment:      p.fulfillment,
-        printfulVariantId: p.printfulVariantId || null,
+        productId:         p.id,
+        size:              size || null,
+        stripePrice:       getStripePrice(p, size),
+        quantity:          qty,
+        fulfillment:       getFulfillment(p, size),
+        printfulVariantId: getPrintfulVariantId(p, size),
       };
     });
+
+    // discounts array is sent to create-checkout.js which creates a
+    // one-time Stripe coupon for the exact savings amount.
 
     // ── UNCOMMENT THIS BLOCK WHEN STRIPE IS SET UP ─────────────
     // btn.disabled = true;
@@ -1491,11 +2098,11 @@
     //   const res = await fetch('/.netlify/functions/create-checkout', {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ items }),
+    //     body: JSON.stringify({ items, discounts }),
     //   });
     //   if (!res.ok) throw new Error('Server error: ' + res.status);
     //   const { url } = await res.json();
-    //   window.location.href = url;  // redirect to Stripe checkout page
+    //   window.location.href = url;
     // } catch (err) {
     //   console.error('Checkout error:', err);
     //   alert('Something went wrong. Please try again.');
@@ -1540,14 +2147,10 @@
     audio.currentTime = 0;
   }
 
-  // Close player when clicking anywhere outside the about section.
-  // Using mousedown so it fires before any stopPropagation on child elements.
   document.addEventListener('mousedown', function (e) {
     const bar = document.getElementById('audioBar');
     if (!bar.classList.contains('visible')) return;
-    if (!e.target.closest('#about')) {
-      dismissAudio();
-    }
+    if (!e.target.closest('#about')) dismissAudio();
   });
 
   document.getElementById('aboutAudio').addEventListener('timeupdate', function () {
@@ -1580,6 +2183,5 @@
   renderProductsPreview();
   applyView(); // handle direct links like tunakawano.com/#gallery
 </script>
-
 </body>
 </html>
