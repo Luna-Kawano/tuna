@@ -536,7 +536,7 @@
     .product-img .img-label { position: absolute; }
     .product-img img.loaded + .img-label { display: none; }
 
-    .product-name { font-family: 'Courier', monospace; font-size: 1rem; line-height: 1.3; }
+    .product-name { font-family: 'Courier', monospace; font-size: 0.88rem; line-height: 1.3; }
     .product-desc { font-size: 12px; color: var(--mid); flex: 1; }
 
     .product-footer {
@@ -633,12 +633,6 @@
       gap: 4px;
     }
 
-    .variant-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--mid);
-    }
 
     .variant-select {
       font-family: 'Courier', monospace;
@@ -779,10 +773,19 @@
       gap: 12px;
     }
 
-    .cart-item-info { flex: 1; }
-    .cart-item-name { font-family: 'Courier', monospace; font-size: 0.95rem; }
+    .cart-item-img {
+      width: 52px;
+      height: 52px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: #e8e8e8;
+    }
+
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-family: 'Courier', monospace; font-size: 0.9rem; line-height: 1.3; }
     .cart-item-price { font-size: 13px; color: var(--mid); margin-top: 2px; }
-    .cart-item-qty { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+    .cart-item-qty { display: flex; align-items: center; gap: 10px; font-size: 13px; flex-shrink: 0; }
 
     .qty-btn {
       background: none;
@@ -924,7 +927,6 @@
 
         <div class="modal-desc" id="modalDesc"></div>
         <div class="variant-row" id="modalVariantRow" style="display:none;">
-          <span class="variant-label">Size</span>
           <select class="variant-select" id="modalVariantSelect" onchange="onModalVariantChange()"></select>
         </div>
         <div id="modalDiscountTier" style="display:none;"></div>
@@ -1352,9 +1354,9 @@
       desc: "Originally an acrylic painting on a 24×30\" canvas, ft. wildflowers from the Rockies and a cutsie black bear cub. Giclée archival print on 200gsm matte paper.",
       img: "print-bear-flower.jpg",
       variants: [
-        { size: '8×10"',  price: 3000, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
-        { size: '11×14"', price: 4500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
-        { size: '16×20"', price: 7500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: '8x10',  price: 3000, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: '11x14', price: 4500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
+        { size: '16x20', price: 7500, stock: null, fulfillment: "self", stripePrice: "price_PLACEHOLDER", printfulVariantId: null },
       ],
     },
 
@@ -1921,13 +1923,13 @@
 
     if (hasVariants(p)) {
       variantRow.style.display = '';
-      variantSelect.innerHTML = p.variants.map(v => {
+      const placeholder = '<option value="" disabled selected>Choose size</option>';
+      const opts = p.variants.map(v => {
         const stockNote = v.stock !== null && v.stock <= 0 ? ' — sold out' : '';
         return `<option value="${v.size}">${v.size} — ${formatPrice(v.price)}${stockNote}</option>`;
       }).join('');
-      // Pre-select first non-sold-out variant
-      const first = p.variants.find(v => v.stock === null || v.stock > 0) || p.variants[0];
-      variantSelect.value = first.size;
+      variantSelect.innerHTML = placeholder + opts;
+      variantSelect.value = ''; // always start on placeholder
     } else {
       variantRow.style.display = 'none';
     }
@@ -1955,23 +1957,35 @@
   function refreshModalBtn() {
     const p    = getProduct(_modalProductId);
     if (!p) return;
-    const size = hasVariants(p) ? document.getElementById('modalVariantSelect').value : null;
-    const key  = makeCartKey(p.id, size);
 
+    // Read the select value directly — .value is '' for the placeholder option
+    const sel  = hasVariants(p) ? document.getElementById('modalVariantSelect') : null;
+    const size = (sel && sel.value) ? sel.value : null;
+    const noSizeChosen = hasVariants(p) && !size;
+
+    const key     = makeCartKey(p.id, size);
     const inCart  = cart[key] || 0;
-    const stock   = getStock(p, size);
+    const stock   = size ? getStock(p, size) : null;
     const soldOut = stock !== null && stock <= 0;
     const maxed   = stock !== null && inCart >= stock;
-    const price   = displayPrice(p, size);
 
-    document.getElementById('modalPrice').textContent = formatPrice(price);
-    document.getElementById('modalStock').textContent = stock !== null ? stock + ' left' : '';
+    // Price: use selected variant price, or lowest as starting hint
+    const price = size
+      ? getVariant(p, size).price
+      : (hasVariants(p) ? p.variants[0].price : p.price);
+
+    document.getElementById('modalPrice').textContent = formatPrice(price) + (noSizeChosen ? '+' : '');
+    document.getElementById('modalStock').textContent = (stock !== null && size) ? stock + ' left' : '';
 
     const btn = document.getElementById('modalAddBtn');
     if (p.commission) {
       btn.textContent = 'Get in touch →';
       btn.disabled    = false;
       btn.onclick     = () => { closeModal(); navTo('contact'); };
+    } else if (noSizeChosen) {
+      btn.textContent = 'Choose a size';
+      btn.disabled    = true;
+      btn.onclick     = null;
     } else {
       btn.textContent = soldOut ? 'Sold out' : inCart > 0 ? 'In cart (' + inCart + ')' : 'Add to cart';
       btn.disabled    = soldOut || maxed;
@@ -2030,6 +2044,8 @@
       const sizeArg   = size ? `'${size}'` : 'null';
       return `
         <div class="cart-item">
+          <img class="cart-item-img" src="images/${p.img}" alt="${p.name}"
+            onerror="this.style.display='none'" />
           <div class="cart-item-info">
             <div class="cart-item-name">${nameLabel}</div>
             <div class="cart-item-price">${formatPrice(price)} each</div>
