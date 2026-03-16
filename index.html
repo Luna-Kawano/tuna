@@ -907,6 +907,24 @@
     }
 
     .cart-note { font-size: 11px; color: var(--mid); margin-bottom: 16px; line-height: 1.5; }
+
+    .opt-in-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--mid);
+      margin-bottom: 12px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .opt-in-label input[type="checkbox"] {
+      margin-top: 2px;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--black);
+    }
     .empty-cart { color: var(--mid); font-size: 13px; padding: 32px 0; text-align: center; }
 
     /* ---------- CONTACT ---------- */
@@ -1056,6 +1074,10 @@
       <span id="cartTotal">$0.00</span>
     </div>
     <p class="cart-note">Shipping calculated at checkout. Canada & international shipping available.</p>
+    <label class="opt-in-label">
+      <input type="checkbox" id="marketingOptIn" />
+      <span>Subscribe to updates & new releases 🐟</span>
+    </label>
     <button class="btn" style="width:100%" id="checkoutBtn" onclick="checkout()" disabled>
       Checkout via Stripe →
     </button>
@@ -2219,6 +2241,7 @@
   // ─────────────────────────────────────────────────────────────
   async function checkout() {
     const btn = document.getElementById('checkoutBtn');
+    const marketingOptIn = document.getElementById('marketingOptIn')?.checked || false;
 
     const discounts = calcDiscounts();
 
@@ -2246,7 +2269,7 @@
     //   const res = await fetch('/.netlify/functions/create-checkout', {
     //     method: 'POST',
     //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ items, discounts }),
+    //     body: JSON.stringify({ items, discounts, marketingOptIn }),
     //   });
     //   if (!res.ok) throw new Error('Server error: ' + res.status);
     //   const { url } = await res.json();
