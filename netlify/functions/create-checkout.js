@@ -142,7 +142,7 @@ exports.handler = async (event) => {
 
   let items, discounts;
   try {
-    ({ items, discounts } = JSON.parse(event.body));
+    ({ items, discounts, marketingOptIn } = JSON.parse(event.body));
   } catch {
     return { statusCode: 400, body: 'Invalid request body' };
   }
@@ -200,6 +200,7 @@ exports.handler = async (event) => {
     discounts_applied: discounts
       ? JSON.stringify(discounts.map(d => ({ label: d.label, savingsCents: d.savingsCents })))
       : '[]',
+    marketing_opt_in: marketingOptIn ? 'true' : 'false',
   };
 
   // ── Create session ────────────────────────────────────────
